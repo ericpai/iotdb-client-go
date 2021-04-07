@@ -66,3 +66,9 @@ e2e_test_for_parent_git_repo:
 e2e_test_clean_for_parent_git_repo:
 	rm -rf target
 	docker-compose -f test/e2e/docker-compose.yml down
+
+linter-install:
+	curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.39.0
+
+lint:
+	golangci-lint run client example rpc
